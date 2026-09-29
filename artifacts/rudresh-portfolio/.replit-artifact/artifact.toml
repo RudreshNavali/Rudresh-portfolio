@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Rudresh Navali — Frontend Portfolio"
+description = "A performance-minded portfolio for Rudresh Navali, a technology lead specializing in React, design systems, accessibility, and production-scale frontend architecture. Includes case studies and an interactive architecture lab."
+version = "1.0.0"
+id = "artifacts/rudresh-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18870
+
+[services.development]
+run = "pnpm --filter @workspace/rudresh-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rudresh-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rudresh-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18870"
+BASE_PATH = "/"

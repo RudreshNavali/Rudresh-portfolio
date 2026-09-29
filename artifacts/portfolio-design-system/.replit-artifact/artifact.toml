@@ -1,0 +1,19 @@
+kind = "design-system"
+previewPath = "/design-system/"
+title = "Portfolio Design System"
+description = "A focused web design system for a senior frontend portfolio, with reusable accessible components, tokens, and a living style guide consumed by the portfolio app."
+version = "1.0.0"
+id = "artifacts/portfolio-design-system"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/design-system/" ]
+localPort = 19295
+
+[services.development]
+run = "pnpm --filter @workspace/portfolio-design-system run dev"
+
+[services.env]
+PORT = "19295"
+BASE_PATH = "/design-system/"

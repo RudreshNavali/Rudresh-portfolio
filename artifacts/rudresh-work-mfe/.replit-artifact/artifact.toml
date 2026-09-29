@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/work-mfe/"
+title = "Rudresh Work Micro Frontend"
+description = "A separately buildable micro frontend for Rudresh Navali's selected work experience, consuming the shared portfolio design system and designed to be mounted by the main portfolio shell."
+version = "1.0.0"
+id = "artifacts/rudresh-work-mfe"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/work-mfe/" ]
+localPort = 24839
+
+[services.development]
+run = "pnpm --filter @workspace/rudresh-work-mfe run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rudresh-work-mfe", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rudresh-work-mfe/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24839"
+BASE_PATH = "/work-mfe/"

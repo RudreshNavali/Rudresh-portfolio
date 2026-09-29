@@ -1,16 +1,41 @@
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "wouter";
-import { Badge } from "@workspace/portfolio-design-system/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@workspace/portfolio-design-system/components/ui/card";
+import { ExternalLink, RadioTower } from "lucide-react";
 import { Button } from "@workspace/portfolio-design-system/components/ui/button";
+import { Card, CardContent } from "@workspace/portfolio-design-system/components/ui/card";
 
-const cases = [
-  { index: "01", client: "UNITED AIRLINES", title: "The surface is the system.", text: "United.com homepage, shopping, and payments work across complex journeys where clarity, resilience, and responsive behavior are not optional.", tags: ["React", "Redux Toolkit", "Redux Saga", "Accessibility"], note: "Production frontend · ongoing" },
-  { index: "02", client: "UNITED AIRLINES", title: "A local constraint, solved in context.", text: "Mexico onsite work brought product, engineering, and regional context into the same room — tightening feedback loops around real customer experiences.", tags: ["Responsive design", "Figma", "WCAG"], note: "Onsite collaboration" },
-  { index: "03", client: "ADVANCED COST PROCESSOR", title: "Reusable is a product decision.", text: "Built maintainable interfaces with JavaScript and Node/Express while balancing shared patterns, testability, and the needs of a growing application.", tags: ["JavaScript", "Node/Express", "Jest", "RTL"], note: "Application engineering" },
-];
-export default function Work() { return <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24">
-  <div className="max-w-3xl"><p className="eyebrow">Selected work / 2021—now</p><h1 className="page-title">Real constraints.<br /><span className="accent-text">Useful outcomes.</span></h1><p className="lede">A few chapters from work across United Airlines and application platforms. No inflated metrics — just the systems, decisions, and collaboration that made the work hold up.</p></div>
-  <div className="mt-16 space-y-5">{cases.map((item) => <Card key={item.index} className="case-card"><CardHeader className="grid gap-6 md:grid-cols-[100px_1fr_auto] md:items-start"><span className="font-mono text-sm text-primary">{item.index}</span><div><CardDescription className="font-mono text-xs tracking-widest">{item.client}</CardDescription><CardTitle className="mt-3 text-2xl md:text-3xl">{item.title}</CardTitle></div><span className="font-mono text-xs text-muted-foreground">{item.note}</span></CardHeader><CardContent className="grid gap-8 md:grid-cols-[100px_1fr_1fr]"><div /><p className="leading-relaxed text-muted-foreground">{item.text}</p><div className="flex flex-wrap content-start gap-2">{item.tags.map(tag => <Badge variant="secondary" key={tag}>{tag}</Badge>)}</div></CardContent></Card>)}</div>
-  <section className="mt-24 grid gap-5 md:grid-cols-2"><Card className="dark-card"><CardContent className="p-8"><p className="eyebrow">Toolbox</p><h2 className="mt-4 text-2xl font-semibold">The stack is a means, not a personality.</h2><p className="mt-4 leading-relaxed text-muted-foreground">React, Redux Toolkit, Redux Saga, JavaScript, Node/Express, Jest, React Testing Library, Figma, Dynatrace, DataDog, and Kibana.</p></CardContent></Card><Card><CardContent className="flex h-full flex-col justify-between p-8"><div><p className="eyebrow">Next chapter</p><h2 className="mt-4 text-2xl font-semibold">Make the architecture visible.</h2></div><Link href="/architecture" className="mt-8"><Button variant="outline" data-testid="button-work-architecture">Visit the lab <ArrowUpRight /></Button></Link></CardContent></Card></section>
-</div>; }
+const WORK_MFE_URL = "/work-mfe/";
+
+export default function Work() {
+  return (
+    <div className="mx-auto max-w-[1440px] px-5 py-10 md:px-10 md:py-16">
+      <Card className="overflow-hidden border-primary/20 bg-card/70 shadow-none">
+        <CardContent className="border-b border-border/80 px-5 py-4 md:px-7">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-3">
+              <RadioTower className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-primary">
+                  Remote feature / work-mfe
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  This surface is independently built and mounted into the portfolio shell.
+                </p>
+              </div>
+            </div>
+            <Button asChild variant="outline" size="sm">
+              <a href={WORK_MFE_URL} target="_blank" rel="noreferrer">
+                Open standalone MFE <ExternalLink className="size-3.5" aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+        <iframe
+          title="Rudresh Navali selected work micro frontend"
+          src={WORK_MFE_URL}
+          loading="eager"
+          className="block h-[1850px] w-full border-0 bg-background md:h-[1560px]"
+          data-testid="iframe-work-mfe"
+        />
+      </Card>
+    </div>
+  );
+}
